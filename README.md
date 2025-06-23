@@ -35,8 +35,8 @@ qt6-multimedia qt6-virtualkeyboard qt6-svg qt6 sddm
       src = pkgs.fetchFromGitHub {
         owner = "Zirconium419122";
         repo = "sddm-astronaut-theme";
-        rev = "500c3b55558c8d4d8628cad3029b53cad838edb6";
-        hash = "sha256-AboJtc0e+1DBN3nwmsGtcNzqPLg0x7dI6xdc1AQZZIQ=";
+        rev = "f2fa1b47606b4d689645430a94536bade8f10032";
+        hash = "sha256-Bmk6NTUUd1JbhuBacEQmtuOpc8a7UTC3Wl8x8oAdKvM=";
       };
 
       installPhase = ''
