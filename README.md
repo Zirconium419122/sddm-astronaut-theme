@@ -4,6 +4,7 @@ A theme for the [SDDM login manager](https://github.com/sddm/sddm) based on [`Su
 Screen resolution: 1440p.
 
 ### Preview
+
 ![Preview](./Previews/preview.png)
 
 ### Dependencies
@@ -35,21 +36,32 @@ qt6-multimedia qt6-virtualkeyboard qt6-svg qt6 sddm
       src = pkgs.fetchFromGitHub {
         owner = "Zirconium419122";
         repo = "sddm-astronaut-theme";
-        rev = "f2fa1b47606b4d689645430a94536bade8f10032";
-        hash = "sha256-Bmk6NTUUd1JbhuBacEQmtuOpc8a7UTC3Wl8x8oAdKvM=";
+        rev = "4453911bad5be6a395fc87b0a0d2d4b16766c80e";
+        hash = "sha256-keLhgmuVdY9wRE+liMIxnodx64yZGdaEso8bjkPG3eQ=";
       };
 
       installPhase = ''
+        runHook preInstall
+
+        rm -f result
+
         mkdir -p $out
         cp -R ./* $out/
+
+        substituteInPlace $out/metadata.desktop \
+          --replace-fail \
+            "ConfigFile=Themes/snowy.conf" \
+            "ConfigFile=Themes/${themeConf}.conf"
+
+        runHook postInstall
       '';
     }
     ```
 
-4. Add this line to `services.displayManager.sddm`:
+4. Add this line to `services.displayManager.sddm`, replace `sddmTheme` with the one of the theme names in `Themes`:
 
     ```nix
-    theme = "${import ../path/to/sddm-theme.nix { inherit pkgs; }}";
+    theme = "${import ../../sddm-theme.nix { inherit pkgs; themeConf = "sddmTheme"; }}";
     ```
 
 ### Install non NixOS
